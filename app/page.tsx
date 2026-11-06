@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import EmployeeProfile from "./components/EmployeeProfile";
 import RecentPosts from "./components/RecentPosts";
+import ExplorePosts from "./components/ExplorePosts";
 
 export default function Home() {
   return (
@@ -23,6 +24,11 @@ export default function Home() {
         <Suspense fallback={<p>Loading recent posts (2s simulated delay)...</p>}>
           <RecentPosts />
         </Suspense>
+      </section>
+
+      <section>
+        <h2 className="mb-2 text-lg font-semibold">All posts</h2>
+        <ExplorePosts />
       </section>
     </main>
   );
