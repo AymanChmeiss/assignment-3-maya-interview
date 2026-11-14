@@ -19,9 +19,14 @@
 - Prediction 3: Correct. Suspense did not show a fallback for the button request. The "Loading..." came from my own useState loading state, because the fetch runs in a click handler, not during render.
 - Prediction 4: Correct. In the HTTP error scenario, I created a `new Response(null, { status: 503 })` and passed it through `parsePostsResponse`. Neither `fetch` nor `Response` threw on its own; my code checked `res.ok` and threw an `ApiError`, so the "HTTP 503" message and the "Try again" button appeared.
 
+
 ## Interview answers
 1. **Where each request runs and my evidence:**
 The profile and recent posts run on the server because they are async Server Components (no "use client") that fetch inside the component.
 Evidence: after loading the page, the Network panel with the filter `jsonplaceholder` showed 0 requests, even though the profile and the three titles were visible.
 The Load posts request runs in the browser because ExplorePosts is a Client Component. Evidence: after clicking, Network showed `posts?userId=1` with Initiator `ExplorePosts.tsx`.
+
+2. **Why did you choose server fetching for the profile and client fetching for the button?**
+The profile needs no user interaction, so it is fetched on the server and arrives as ready HTML without extra JavaScript in the browser.
+The button needs a user click, `onClick`, and state (loading, error, success), and these only work in a Client Component. Also, the user decides when to load the posts, so the request starts in the browser after the click.
 
