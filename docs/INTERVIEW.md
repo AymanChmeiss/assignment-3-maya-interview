@@ -12,3 +12,9 @@
 3. **Does Suspense around a click-handler fetch show its fallback?** No. Suspense only reacts to components that suspend during render. A fetch in an event handler doesn't suspend, so I need manual loading/error state.
 
 4. **Does fetch throw on HTTP 503?** No. fetch only rejects on network failure. A 503 returns a normal Response with `res.ok === false`, so I must check `res.ok` and throw myself.
+
+## What I learned after testing
+- Prediction 1: Correct. The profile and recent posts did not appear in the Network panel, and the Load posts request appeared only after the click.
+- Prediction 2: Mostly correct. The page title, the intro, and the All posts section stayed visible, and only the Recent posts area showed its fallback ("Loading recent posts..."). One difference: the profile also showed its own "Loading profile..." fallback for a moment, because it has its own Suspense boundary.
+- Prediction 3: Correct. Suspense did not show a fallback for the button request. The "Loading..." came from my own useState loading state, because the fetch runs in a click handler, not during render.
+- Prediction 4: Correct. In the HTTP error scenario, I created a `new Response(null, { status: 503 })` and passed it through `parsePostsResponse`. Neither `fetch` nor `Response` threw on its own; my code checked `res.ok` and threw an `ApiError`, so the "HTTP 503" message and the "Try again" button appeared.
