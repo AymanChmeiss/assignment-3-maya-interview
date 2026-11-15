@@ -45,5 +45,8 @@ An HTTP failure means the server answered with a failure status such as 503. `fe
 I tested this with Offline mode and saw the network error message.
 
 7. **What happens if employee ID 1 is changed to 2 in all three sections?**
+I changed the ID to 2 in the two places in `lib/api.ts` (`/users/2` and `userId=2`). The profile changed to Ervin Howell (employee 2), and Recent posts and Load posts used the same ID. If I changed only one place, the page would mix data (employee 2 with posts of employee 1) without any error. Keeping the ID in one constant would avoid this.
+The ID is written in two places, but it affects three sections: the profile, Recent posts, and Load posts.
 
-
+8. **Which decision did you personally verify rather than accepting without checking?**
+I verified that repeated clicks do not start duplicate requests. I chose the Slow scenario, clicked Load posts, then clicked the button many times during the wait. The button was disabled and the Network panel (filter `jsonplaceholder`) showed only 1 request.
