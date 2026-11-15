@@ -1,7 +1,9 @@
 import type { Employee, Post } from "./types";
 
 const BASE_URL = "https://jsonplaceholder.typicode.com";
-export const POSTS_URL = `${BASE_URL}/posts?userId=1`;
+const EMPLOYEE_ID = 1;
+export const POSTS_URL = `${BASE_URL}/posts?userId=${EMPLOYEE_ID}`;
+
 
 export class ApiError extends Error {
   status?: number;
@@ -26,7 +28,7 @@ export async function parsePostsResponse(res: Response): Promise<Post[]> {
 export async function getEmployee(): Promise<Employee> {
   let res: Response;
   try {
-    res = await fetch(`${BASE_URL}/users/1`);
+    res = await fetch(`${BASE_URL}/users/${EMPLOYEE_ID}`);
   } catch {
     throw new ApiError("Network error while loading the profile.");
   }
