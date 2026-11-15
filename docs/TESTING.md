@@ -40,7 +40,7 @@ Next.js version: 16.4.3. Tested in Chrome on localhost (`npm run dev`).
 | Recovery | Switch to Success and retry shows posts, clears error | Posts appeared, error message disappeared | Pass |
 | Section independence | Client failure keeps profile and preview | Profile and recent posts stayed visible during the error | Pass |
 | Usability | Labels, visible focus, readable at 360px | Tab focus visible; clicking the label focuses the select; readable at 360px with no horizontal scroll | Pass |
-| Offline network failure | Non-ApiError message | Not tested | Not tested |
+| Offline network failure | Non-ApiError message | "We couldn't reach the server. Check your connection and try again." and the "Try again" button appeared; no HTTP status shown | Pass |
 
 ### Steps used
 - Server preview: DevTools Network set to Slow 4G, then F5, watching the sections appear.
