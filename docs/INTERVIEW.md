@@ -44,3 +44,6 @@ The whole page would show only one fallback for about 2 seconds, because the bou
 An HTTP failure means the server answered with a failure status such as 503. `fetch` still returns a Response with `res.ok === false`, so my code throws an `ApiError`. A network failure means no response arrived at all (e.g. offline), so `fetch` rejects and the code goes straight to `catch`. An empty result is a successful response (200) with an empty array, so it is not an error and I show "No posts found".
 I tested this with Offline mode and saw the network error message.
 
+7. **What happens if employee ID 1 is changed to 2 in all three sections?**
+
+
