@@ -40,3 +40,7 @@ The whole page would show only one fallback for about 2 seconds, because the bou
 5. **How does your custom error class help, and what does super(message) do?**
 `ApiError` extends `Error`, so it inherits everything from `Error` and adds a `status`. I throw it when `res.ok` is false, and in the `catch` I use `instanceof ApiError` to tell an HTTP failure (I show the status, like 503) from other failures such as a network error. `super(message)` calls the parent `Error` constructor so the message is stored. I saved status to show the status number in the message (e.g.: HTTP 503).
 
+6. **What is the difference between an HTTP failure, a network failure, and an empty result?**
+An HTTP failure means the server answered with a failure status such as 503. `fetch` still returns a Response with `res.ok === false`, so my code throws an `ApiError`. A network failure means no response arrived at all (e.g. offline), so `fetch` rejects and the code goes straight to `catch`. An empty result is a successful response (200) with an empty array, so it is not an error and I show "No posts found".
+I tested this with Offline mode and saw the network error message.
+
