@@ -30,3 +30,7 @@ The Load posts request runs in the browser because ExplorePosts is a Client Comp
 The profile needs no user interaction, so it is fetched on the server and arrives as ready HTML without extra JavaScript in the browser.
 The button needs a user click, `onClick`, and state (loading, error, success), and these only work in a Client Component. Also, the user decides when to load the posts, so the request starts in the browser after the click.
 
+3. **What activates the preview's Suspense fallback? Why doesn't the click-handler request activate it automatically?**
+The fallback is shown when a component inside Suspense waits during render. In my project, RecentPosts is async and awaits the delay and the fetch, so React shows the fallback until it is ready.
+The button request does not activate it because the fetch runs inside a click handler, after render has finished. So I track loading myself with useState.
+
