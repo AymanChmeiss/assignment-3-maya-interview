@@ -34,3 +34,9 @@ The button needs a user click, `onClick`, and state (loading, error, success), a
 The fallback is shown when a component inside Suspense waits during render. In my project, RecentPosts is async and awaits the delay and the fetch, so React shows the fallback until it is ready.
 The button request does not activate it because the fetch runs inside a click handler, after render has finished. So I track loading myself with useState.
 
+4. **What would change if you moved the preview's boundary around the whole dashboard?**
+The whole page would show only one fallback for about 2 seconds, because the boundary replaces everything inside it while any child is not ready. The title, profile, and button would wait for the slow Recent posts even though they are ready. With the boundary only around RecentPosts, only that section waits.
+
+5. **How does your custom error class help, and what does super(message) do?**
+`ApiError` extends `Error`, so it inherits everything from `Error` and adds a `status`. I throw it when `res.ok` is false, and in the `catch` I use `instanceof ApiError` to tell an HTTP failure (I show the status, like 503) from other failures such as a network error. `super(message)` calls the parent `Error` constructor so the message is stored. I saved status to show the status number in the message (e.g.: HTTP 503).
+
