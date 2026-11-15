@@ -50,3 +50,8 @@ The ID is written in two places, but it affects three sections: the profile, Rec
 
 8. **Which decision did you personally verify rather than accepting without checking?**
 I verified that repeated clicks do not start duplicate requests. I chose the Slow scenario, clicked Load posts, then clicked the button many times during the wait. The button was disabled and the Network panel (filter `jsonplaceholder`) showed only 1 request.
+
+## AI suggestion I evaluated
+- Proposed: The AI suggested protecting the Load posts button from duplicate requests by returning early when the state is "loading" and disabling the button.
+- How I checked it: I chose the Slow scenario, clicked the button many times during the wait, and the Network panel showed only 1 request.
+- Decision (accepted / changed / rejected): Accepted.
